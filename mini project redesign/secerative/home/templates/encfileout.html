@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">    
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet"  href="{%  static  'css/home.css'  %}">
+    <link rel="icon" type="image/png" href="/logo.png">
+    <style>
+        body {
+            background-color: #c8d8e4;
+            font-family: 'Exo', sans-serif;
+        }
+
+        h2 {
+            padding: 20px 26px;
+            color: #2b6777;
+            font-size: 30px;
+            font-family: 'Exo', sans-serif;
+        }
+
+        p {
+            padding: 20px 26px;
+            color: #2b6777;
+            font-size: 22px;
+            font-family: 'Exo', sans-serif;
+            word-break: break-word; 
+        }
+
+    </style>
+    <title>secerative homepage</title>
+</head>
+<body>
+    <header class="flexheader">
+        <img src="{% static 'images/logo.png' %}" class="logopic">
+        <h1 class="logoname">Secerative</h1>
+        <nav class="navbar">
+            <ul class="flexul">
+                <li class="listitems"><a href="/home">Home</a></li>
+                <li class="listitems"><a href="/textenc">Text Encryption</a></li>
+                <li class="listitems"><a href="/fileenc">File Encryption</a></li>
+                <li class="listitems"><a href="/feedback">Feedback</a></li>
+                {% if user.is_authenticated %}
+                <li class="reg_text">
+                Hi, {{user.username}}
+                </li>
+                <li class="listitems">
+                <a href="/logout_user">LOGOUT</a>
+                </li>
+                {% else %}
+                <li class="reg_signup">
+                <a href="/register">SIGN UP</a>
+                </li>
+                <li class="listitems">
+                <a href="/login_user">LOGIN</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <h2>Your encrypted file</h2>
+        <p>Click here to Download: <a href="{{ uploaded_file_url }}" download="{{ uploaded_file }}">{{ uploaded_file }}</a></p> 
+    </section>
+</body>
+</html>

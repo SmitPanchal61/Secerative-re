@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo&display=swap" rel="stylesheet">
+    
+    <title>TEXT Encryption Page</title>
+    <link rel="stylesheet"  href="{%  static  'css/textenc.css'  %}">
+    <link rel="icon" type="image/png" href="D:\mini project\img.png">
+</head>
+<body>
+    <header class="flexheader">
+        <img src="{% static 'images/logo.png' %}" class="logopic">
+        <h1 class="logoname">Secerative</h1>
+        <nav class="navbar">
+            <ul class="flexul">
+                <li class="listitems"><a href="/home">Home</a></li>
+                <li class="listitems"><a href="/textenc">Text Encryption</a></li>
+                <li class="listitems"><a href="/fileenc">File Encryption</a></li>
+                <li class="listitems"><a href="/feedback">Feedback</a></li>
+                {% if user.is_authenticated %}
+                <li class="reg_text">
+                Hi, {{user.username}}
+                </li>
+                <li class="listitems">
+                <a href="/logout_user">LOGOUT</a>
+                </li>
+                {% else %}
+                <li class="reg_signup">
+                <a href="/register">SIGN UP</a>
+                </li>
+                <li class="listitems">
+                <a href="/login_user">LOGIN</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <h1 class="Heading1">Text Encryption</h1>
+        <div class="main">
+            <div class = "first">
+            <h3 class="Heading" class="big"class="FF" >Enter the Text you want to Encrypt</h3>
+            <p class="FF">Text encryption protects individual Text or Text systems by encrypting individual characters.
+                Encryption means converting the plain text data into some coded form</p>
+                <br>
+                <form method="post">
+                    {% csrf_token %}
+                    <label id="mytextlabel" for="mytext">Enter the Text you want to Encrypt: </label><br>
+                    <textarea id="mytext" name="user_input"></textarea>
+                    <br>
+                        <!-- <input type="submit"/> -->
+                    <p class="big" class="FF">If you want to encrypt your Text press the button below.</p>
+                    <button type="submit" class="enc">Encrypt</button>
+                </form>               
+            </div>
+            <div class="second">    
+                <img id = "fencimg" src="{% static 'images/tEnc.png' %}" alt="text encryption">
+            </div>
+        </div>
+        <div class="first">
+            <form method="post" action="/textdec">
+                {% csrf_token %}
+                <label id="mytextlabel" for="mytextdec">Enter the Text you want to Decrypt: </label><br>
+                <textarea id="mytextdec" name="dec_user_input"></textarea>
+                <br>
+                    <!-- <input type="submit"/> -->
+                <p class="big" class="FF">If you want to Decrypt your Text press the button below.</p>
+                <button type="submit" class="enc">Decrypt</button>
+            </form> 
+        </div>.
+    </section>
+</body>
+</html>
